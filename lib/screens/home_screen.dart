@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lux_drive/models/brand_model.dart';
+import 'package:lux_drive/models/car_model.dart';
+import 'package:lux_drive/widgets/brand_item.dart';
+import 'package:lux_drive/widgets/car_card.dart';
+import 'package:lux_drive/widgets/menu_button.dart';
+import 'package:lux_drive/widgets/text_field.dart';
+import 'package:lux_drive/widgets/transmission_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,12 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<BrandModel> brand = [
-    BrandModel(image: "images/tesla.png", title: "Tesla"),
-    BrandModel(image: "images/bmw.png", title: "BMW"),
-    BrandModel(image: "images/mercedes.png", title: "Mercedes"),
-    BrandModel(image: "images/mercedes.png", title: "Mercedes"),
-  ];
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Color(0xFF0C1120),
       extendBodyBehindAppBar: true,
       body: ListView(
-        padding: EdgeInsets.only(top: 70, left: 30, right: 20),
+        padding: EdgeInsets.only(top: 70, left: 18, right: 20),
         children: [
           Row(
             children: [
@@ -57,34 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Spacer(),
-              Container(
-                height: 45,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  border: Border.all(color: Colors.white60),
-                ),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.menu, size: 28, color: Colors.white),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(shape: BoxShape.circle),
-                      height: 30,
-                      width: 30,
-                      child: ClipRRect(
-                        borderRadius: BorderRadiusGeometry.circular(25),
-                        child: Image.asset(
-                          "images/person.png",
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 7),
-                  ],
-                ),
-              ),
+              MenuButton(),
             ],
           ),
           SizedBox(height: 34),
@@ -92,33 +66,9 @@ class _HomeScreenState extends State<HomeScreen> {
             "Explore new __________\ndestinations with ease!",
             style: TextStyle(color: Colors.white, fontSize: 27),
           ),
-          SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: TextFormField(
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                prefixIcon: Image.asset("images/search.png"),
-                hintText: "Search your dream car...",
-                hintStyle: TextStyle(color: Color(0xFF8C8BA7), fontSize: 17),
-                fillColor: Colors.white.withValues(alpha: 0.08),
-                filled: true,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(50),
-                  borderSide: BorderSide(
-                    color: Colors.white.withValues(alpha: 0.08),
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(50),
-                  borderSide: BorderSide(
-                    color: Colors.white.withValues(alpha: 0.08),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: 34),
+          SizedBox(height: 20),
+          CustomTextField(),
+          SizedBox(height: 20),
           Row(
             children: [
               Text(
@@ -132,38 +82,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          SizedBox(height: 10,),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: List.generate(brand.length, (index) {
-                return  Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Container(
-                    height: 104,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white.withValues(alpha: 0.08),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(brand[index].image,height: 40, width: 40, fit: BoxFit.cover,),
-                          SizedBox(height: 5,),
-                          Text(brand[index].title, style: TextStyle(
-                            color: Colors.white
-                          ),)
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },)
-            ),
+          SizedBox(height: 10),
+          BrandItem(),
+          SizedBox(height: 30),
+          Text(
+            "Select by transmission",
+            style: TextStyle(color: Colors.white, fontSize: 18),
           ),
+          SizedBox(height: 15),
+          TransmissionItem(),
+          SizedBox(height: 15),
+          CarCard(),
         ],
       ),
     );

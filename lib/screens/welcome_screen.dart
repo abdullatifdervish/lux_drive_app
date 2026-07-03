@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lux_drive/screens/home_screen.dart';
+import 'package:lux_drive/screens/main_layout.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -61,7 +62,7 @@ class WelcomeScreen extends StatelessWidget {
                     child: Text("Let's Go"),
                   ),
                   onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (c)=> HomeScreen()));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (c)=> MainLayout()));
                 },)
               ],
             ),
