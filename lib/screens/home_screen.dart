@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lux_drive/models/brand_model.dart';
-import 'package:lux_drive/models/car_model.dart';
 import 'package:lux_drive/widgets/brand_item.dart';
 import 'package:lux_drive/widgets/car_card.dart';
 import 'package:lux_drive/widgets/menu_button.dart';
