@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lux_drive/models/car_model.dart';
+import 'package:lux_drive/widgets/booknow_button.dart';
+import 'package:lux_drive/widgets/detail_car_information.dart';
+import 'package:lux_drive/widgets/detail_title.dart';
+import 'package:lux_drive/widgets/dots.dart';
+import 'package:lux_drive/widgets/vehicle_gallery.dart';
+import 'package:lux_drive/widgets/vehicle_thumbnails.dart';
 
 class DetailScreen extends StatefulWidget {
   final CarModel car;
@@ -29,8 +35,9 @@ class _DetailScreenState extends State<DetailScreen> {
       backgroundColor: Color(0xFF0C1120),
       extendBodyBehindAppBar: true,
       body: Padding(
-        padding: const EdgeInsets.only(top: 80, left: 20, right: 20),
+        padding: const EdgeInsets.only(top: 80, left: 10, right: 10),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -66,96 +73,53 @@ class _DetailScreenState extends State<DetailScreen> {
               ],
             ),
             SizedBox(height: 20),
-            SizedBox(
-              height: 260,
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: widget.car.gallery.length,
-                onPageChanged: (index) {
-                  // Kaydırıldığında alttaki seçili indeksi güncelle
-                  setState(() {
-                    currentIndex = index;
-                  });
-                },
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                        widget.car.gallery[index],
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  );
-                },
-              ),
+            VehicleGallery(
+              galleryImages: widget.car.gallery,
+              pageController: _pageController,
+              currentIndex: currentIndex,
+              onPageChanged: (index) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
             ),
             SizedBox(height: 10),
+            VehicleThumbnails(
+              galleryImages: widget.car.gallery,
+              pageController: _pageController,
+              currentIndex: currentIndex,
+            ),
+            SizedBox(height: 10),
+            // Noktaların (Indicator) Gösterileceği Alan
+            Dots(galleryImages: widget.car.gallery, currentIndex: currentIndex),
+            DetailTitle(
+              name: widget.car.name,
+              pricePerDay: widget.car.pricePerDay,
+            ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: List.generate(widget.car.gallery.length, (index) {
-                  final isSelected = currentIndex == index;
-                  return GestureDetector(
-                    onTap: () {
-                      // Küçük resme basınca büyük resmi o sayfaya kaydır
-                      _pageController.animateToPage(
-                        index,
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                      );
-                    },
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      width: 75,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        // Seçili olan küçük resmin etrafına border ekleyebilirsin
-                        border: Border.all(
-                          color: isSelected ? Colors.white : Colors.transparent,
-                          width: 2,
-                        ),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Opacity(
-                          // Seçili olmayanı biraz soluk yaparak odağı seçiliye çekebilirsin
-                          opacity: isSelected ? 1.0 : 0.5,
-                          child: Image.asset(widget.car.gallery[index], fit: BoxFit.cover),
-                        ),
-                      ),
-                    ),
-                  );
-                }),
+              padding: const EdgeInsets.only(top: 5, left: 18, right: 18),
+              child: Text(
+                widget.car.description,
+                style: TextStyle(color: Colors.white),
               ),
             ),
-            /*  SizedBox(
-              height: 70,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 6),
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: widget.car.gallery.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 5, top: 2, right: 10),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(
-                          widget.car.gallery[index],
-                          height: 70,
-                          width: 77,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    );
-                  },
-                ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Divider(color: Colors.grey[800]),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: Text(
+                "Specifications",
+                style: TextStyle(color: Colors.white, fontSize: 18),
               ),
-            ), */
+            ),
+            DetailCarInformation(
+              horsepower: widget.car.horsepower,
+              transmission:widget.car.transmission,
+            ),
+            Spacer(),
+            BooknowButton(),
           ],
         ),
       ),

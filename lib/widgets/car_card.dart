@@ -16,11 +16,13 @@ class CarCard extends StatelessWidget {
         seats: "4",
         images: "images/home_mercedes.png",
         gallery: [
-              "images/m_detail1.png",
-              "images/m_detail2.png",
-              "images/m_detail3.png",
-              "images/m_detail4.png",
+          "images/m_detail1.png",
+          "images/m_detail2.png",
+          "images/m_detail3.png",
+          "images/m_detail4.png",
         ],
+        description:
+            "The Mercedes SL 63 AMG is a sports car created using advanced technologies that have made it incredibly fast and powerful.",
       ),
       CarModel(
         name: "Mercedes SL 63",
@@ -29,6 +31,8 @@ class CarCard extends StatelessWidget {
         transmission: "Automatic",
         seats: "4",
         images: "images/home_mercedes.png",
+        description:
+            "The Mercedes SL 63 AMG is a sports car created using advanced technologies that have made it incredibly fast and powerful.",
       ),
     ];
     return SizedBox(

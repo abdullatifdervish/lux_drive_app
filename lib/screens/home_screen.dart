@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lux_drive/widgets/app_drawer.dart';
 import 'package:lux_drive/widgets/brand_item.dart';
 import 'package:lux_drive/widgets/car_card.dart';
 import 'package:lux_drive/widgets/menu_button.dart';
@@ -13,11 +14,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.transparent),
+      //appBar: AppBar(backgroundColor: Colors.transparent,automaticallyImplyLeading: false),
+      drawer: const AppDrawer(),
       backgroundColor: Color(0xFF0C1120),
       extendBodyBehindAppBar: true,
       body: ListView(
@@ -60,9 +61,26 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           SizedBox(height: 34),
-          Text(
-            "Explore new __________\ndestinations with ease!",
-            style: TextStyle(color: Colors.white, fontSize: 27),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "Explore new",
+                    style: TextStyle(color: Colors.white, fontSize: 27),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15.0, top: 10),
+                    child: Image.asset("images/line.png"),
+                  ),
+                ],
+              ),
+              Text(
+                "destinations with ease!",
+                style: TextStyle(color: Colors.white, fontSize: 27),
+              ),
+            ],
           ),
           SizedBox(height: 20),
           CustomTextField(),

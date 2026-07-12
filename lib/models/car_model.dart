@@ -6,6 +6,7 @@ class CarModel {
   final String seats;
   final String images;
   final List<String> gallery;
+  final String description;
 
   CarModel(   {
     required this.name,
@@ -15,5 +16,6 @@ class CarModel {
     required this.seats,
     required this.images,
     this.gallery = const [],
+    required this.description,
   });
 }

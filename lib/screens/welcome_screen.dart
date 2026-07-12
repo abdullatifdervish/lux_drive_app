@@ -52,17 +52,20 @@ class WelcomeScreen extends StatelessWidget {
                 Text("Discover a world of premium vehicles at your\nfingertips. Unleash the thrill of driving in style. Your\njourney begins here.", style: TextStyle(
                   color: Colors.white54
                 ),),
-                SizedBox(height: 480,),
-                MaterialButton(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 120, vertical: 15),
-                    child: Text("Let's Go"),
-                  ),
-                  onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (c)=> MainLayout()));
-                },)
+                Spacer(),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: MaterialButton(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 120, vertical: 15),
+                      child: Text("Let's Go"),
+                    ),
+                    onPressed: () {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (c)=> MainLayout()));
+                  },),
+                )
               ],
             ),
           ),
